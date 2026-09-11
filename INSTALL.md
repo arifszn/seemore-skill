@@ -1,6 +1,6 @@
 # Installing the seemore skill
 
-This repo holds the **seemore agent skill**: instructions that let an AI agent set seemore up and run it for you, so you never have to type a command yourself. It is not the seemore tool itself. That's [the npm package](https://www.npmjs.com/package/seemore) and [the VS Code extension](https://marketplace.visualstudio.com/items?itemName=arifszn.seemore-vscode), and the skill installs whichever it needs on its own.
+This repo holds the **seemore agent skill**: instructions that let an AI agent set seemore up and run it for you, so you never have to type a command yourself. It is not the seemore tool itself — that's [the npm package](https://www.npmjs.com/package/seemore), which the skill runs on demand with `npx`, so nothing is installed beforehand.
 
 The skill is one self-contained folder, `seemore/`, with a `SKILL.md` at its root (its `name` matches the folder, as the spec requires). Every agent loads that same folder; only the parent *skills directory* changes from tool to tool. So installation is always the same three steps: **clone, copy the `seemore/` folder into your agent's skills directory, then clean up.**
 
@@ -72,4 +72,4 @@ You can also invoke it by name instead of waiting for it to trigger. In Claude C
 
 ## Requirements
 
-[Node.js](https://nodejs.org) 20 or newer, because that's what seemore itself needs. The skill checks for it and tells you if it's missing. Installing Node is the one step it can't do for you.
+seemore runs on [Node.js](https://nodejs.org) 20 or newer. You won't run into this unless `npx seemore` fails; the skill then tells you plainly that Node is missing. Installing Node is the one step it can't do for you.
