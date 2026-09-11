@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "seemore-skill",
+  "description": "Turn a folder of Markdown into a documentation site by asking an AI agent — install, scaffold, write, preview, build and publish, with no terminal commands to run yourself.",
+  "owner": {
+    "name": "arifszn",
+    "url": "https://github.com/arifszn"
+  },
+  "plugins": [
+    {
+      "name": "seemore",
+      "description": "Set up and run seemore for someone who would rather describe what they want than run install commands. Scaffolds a docs folder, writes and edits pages, starts a live preview, builds a static site, and publishes it to a live URL.",
+      "source": "./seemore",
+      "category": "productivity",
+      "tags": ["documentation", "markdown", "mdx", "docs", "static-site", "publishing"]
+    }
+  ]
+}
