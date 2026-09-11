@@ -14,7 +14,7 @@ Turn a folder of Markdown into a real documentation site, with navigation, searc
 Three things follow from it:
 
 - **Say what happened, not what you typed.** "Your site is running at http://localhost:4040, with 12 pages" beats pasting the command and its log. Keep flags, file paths and stack traces out of your messages unless the user asks, or you need their decision.
-- **Never move or rewrite their files to suit the tool.** seemore reads a folder where it already is; that is the whole point of it. If the layout is awkward, say so and offer. Don't reorganise someone's notes unasked.
+- **Never move or rewrite their files to suit the tool.** seemore reads a folder where it already is; that is the whole point of it. If the layout is awkward, say so and offer. Don't reorganise someone's notes unasked. The same goes for adding files nobody asked for — a config file, a `dist/` build. Suggest; let them say yes.
 - **There is exactly one thing the user must sometimes do themselves, an interactive login when publishing.** That is the single documented exception, and `seemore/references/publishing.md` covers how to hand it over cleanly.
 
 ## What seemore actually is (so you don't over-build)
@@ -49,7 +49,7 @@ Ask a question only when you genuinely can't tell what they want documented, and
 
 ## Step 3. Start the preview
 
-This is the moment the work becomes visible, so get here early, often before writing a single page.
+This is the moment the work becomes visible, so get here before anything else: no questions asked first, nothing created first. A user trying seemore for the first time is won or lost here, so the site should be in their browser within seconds of the request — everything from Step 4 on happens around a preview that's already live.
 
 The dev server is **long-running** and does not exit. Start it as a background process, never as a blocking call that hangs the session. Use the machine-readable flag so you don't have to screen-scrape coloured output:
 
@@ -86,9 +86,13 @@ The parts that bite most often, so they're here rather than one file away:
 
 With the preview running, every save is visible immediately, so make a change and then tell the user what to look at, rather than describing it.
 
-## Step 5. Configure it, only if there's a reason
+## Step 5. Configure it, only when the user asks for something it controls
 
-A folder with no config file builds correctly. Create `seemore.config.ts` next to the content when the user wants something it controls: a site title, a theme, a nav link, a footer, a logo, "edit this page" links, excluded drafts.
+A folder with no config file builds correctly, and that stays the default — the preview needs none of this, so never delay a first run for configuration. If you spot a reason for a config file, it waits until the site is live.
+
+Never create `seemore.config.ts` on your own initiative, even for a good reason. The tempting ones: agent-instruction files (CLAUDE.md, AGENTS.md) cluttering the page list, or the site having no title. When you spot one, fold it into the message that reports the live URL — "Your site's up at http://localhost:4040 with 18 pages. Two of those are agent instructions rather than reading material; I can hide them with a small config file if you want" — and move on. They're already looking at the site, so a yes costs them nothing and the site was up either way.
+
+Create or edit the config only when the user asks for something it controls: a site title, a theme, a nav link, a footer, a logo, "edit this page" links, excluding files. Then the file is just the mechanism for what they asked for — make it, no extra permission needed.
 
 ```ts
 // seemore.config.ts
@@ -101,11 +105,11 @@ export default {
 
 `title` is **required as soon as a config file exists**. The build fails without it, because that's what names the site in the header. Twelve built-in themes are available; the full option list, feature flags and hosted-search setup are in `seemore/references/configuration.md`.
 
-Translate, don't quiz. "Can it be dark blue?" is a `theme` choice you should just make and show them, not a question about colour tokens.
+Translate, don't quiz. "Can it be dark blue?" is a `theme` choice you should just make and show them, not a question about colour tokens. They asked for the outcome, so the config change that delivers it is already covered by the ask.
 
 ## Step 6. Build the static site
 
-When they want something to keep, host or hand over:
+Only when they ask for something to keep, host or hand over — never as a sanity check, and never part of a first run. A build writes a `dist/` folder into theirs, so don't run one unasked, and don't use it to validate content either: the preview already surfaces dead links and duplicate addresses as warnings.
 
 ```bash
 npx seemore build

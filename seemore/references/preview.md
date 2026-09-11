@@ -49,7 +49,7 @@ Worth telling the user, because it's more than hot-reloading text:
 
 - Adding, deleting, renaming or retitling a file updates the sidebar, the navigation and the search index immediately.
 - Editing a page's body updates it in place without losing scroll position.
-- A content error that would fail a build (a dead link, a duplicate address) is a **warning** in dev, not a crash, so a half-finished edit doesn't take the site down. Those same problems do fail `seemore build`, which is where to catch them.
+- A content error that would fail a build (a dead link, a duplicate address) is a **warning** in dev, not a crash, so a half-finished edit doesn't take the site down. Catch them here, in the warnings — don't run `seemore build` to check for problems: a build writes `dist/` into the user's folder, which they didn't ask for.
 - `draft: true` pages are visible in the preview and excluded from the build.
 
 ## Editing from the page
