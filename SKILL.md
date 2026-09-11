@@ -33,7 +33,7 @@ Because of this, **the most common correct answer is very little work**. If the 
 
 ## Step 1. Work out what they've got
 
-Look before you ask. Check the working directory for `.md`/`.mdx` files, a `seemore.config.ts`, and whether anything is already installed. Then place the request in one of three cases:
+Look before you ask. Check the working directory for `.md`/`.mdx` files and a `seemore.config.ts`. Then place the request in one of three cases:
 
 | What you find | What to do |
 | --- | --- |
@@ -45,13 +45,7 @@ Ask a question only when you genuinely can't tell what they want documented, and
 
 ## Step 2. Get seemore runnable
 
-Check Node first: `node --version` must be 20 or newer. If it's older or missing, stop and tell the user plainly that Node.js 20+ is needed, and point them at https://nodejs.org. That is an install you cannot do for them, and guessing at version managers wastes their time.
-
-Then pick how to run it:
-
-- **Default: don't install anything.** `npx seemore` downloads and runs it on demand. For a one-off look at a folder, this is the whole answer.
-- **Install it as a project dependency** when the folder is a repo that will keep its docs, so the version is pinned and CI can build it: `npm install -D seemore`, then add `"docs": "seemore"` and `"docs:build": "seemore build"` scripts. Match the package manager already in the project (a `pnpm-lock.yaml` means pnpm, `yarn.lock` means yarn, `bun.lockb` means bun).
-- **Mention the code-editor extension** if the user is in VS Code, Cursor or Antigravity and would rather have the site in a panel than a browser tab. It bundles the CLI, so there is nothing to install separately: they install "seemore" from the marketplace and click the eye icon above any Markdown file. Offer it; don't insist.
+`npx seemore` downloads and runs it on demand — there is nothing to install beforehand. Don't check Node up front; just run the command. If it fails (`npx` or `node` not found, or an error about needing Node 20+), check `node --version` then. If it's older or missing, stop and tell the user plainly that Node.js 20+ is needed, and point them at https://nodejs.org. That is an install you cannot do for them, and guessing at version managers wastes their time.
 
 ## Step 3. Start the preview
 
@@ -146,7 +140,7 @@ Their vocabulary is pages, sidebar, theme, link, publish. Yours should match:
 Read these as you reach them, not all at once:
 
 - `seemore/references/scaffolding.md` for starting a docs folder from nothing (Step 1)
-- `seemore/references/preview.md` for running the dev server, ports, the editor extension (Step 3)
+- `seemore/references/preview.md` for running the dev server and ports (Step 3)
 - `seemore/references/content-authoring.md` for Markdown and MDX syntax, components, ordering, page addresses (Step 4)
 - `seemore/references/configuration.md` for every `seemore.config.ts` option, themes, feature flags, search (Step 5)
 - `seemore/references/publishing.md` for building and deploying to a live URL (Steps 6 and 7)

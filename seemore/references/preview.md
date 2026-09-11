@@ -62,15 +62,6 @@ Mention this once, early. It's local-preview only, never in a build, and it can 
 
 The dev server writes nothing into the content folder: seemore's own app is the Vite root and caches go to the OS temp directory. Say so if the user is nervous about pointing a tool at their notes. Files change only when they save an inline edit, or when you run `build` or `export`.
 
-## In a code editor instead
-
-If the user works in VS Code, Cursor, Antigravity or another VS Code-compatible editor, the **seemore** extension puts the same site in a panel beside the file they're editing, with no terminal, no `npx` and no browser tab. It bundles the CLI, so there's nothing else to install.
-
-1. Install "seemore" from the VS Code Marketplace or Open VSX.
-2. Open a Markdown file and click the eye icon in the editor title bar, or right-click a folder in the explorer and choose **Open Folder in seemore**.
-
-Offer it as a convenience; the CLI preview is not worse, just in a different window.
-
 ## Stopping it
 
 Stop the background process when the work is done, and say you've done it. Leaving a stray server on a port the user doesn't know about is the kind of mess they can't debug themselves.

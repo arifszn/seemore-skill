@@ -52,9 +52,9 @@ The build is deliberately stricter than the preview: problems you can write past
 
 ## Environment
 
-**Node too old or missing**: `node --version` must be 20 or newer. Stop and point the user at https://nodejs.org. Don't try to install Node for them or guess at a version manager.
+**Node too old or missing**: this surfaces as `npx seemore` itself failing — `npx` or `node` not found, or an error about Node 20+. Check `node --version` only then; if it's older or missing, stop and point the user at https://nodejs.org. Don't try to install Node for them or guess at a version manager.
 
-**`npx` prompts to install the package**: expected on first run, and it's already answered by the time you see output. If the environment blocks the download, install it into the project instead (`npm install -D seemore`).
+**`npx` prompts to install the package**: expected on first run, and it's already answered by the time you see output.
 
 **Windows**: paths are handled, but if something looks path-shaped and wrong, say which path and on which command; don't paper over it.
 
