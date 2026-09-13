@@ -3,8 +3,8 @@
 `seemore` with no command starts a dev server that watches the folder and updates the browser as files change. It is the centre of the workflow: get it running early and leave it running.
 
 ```bash
-npx seemore            # serve the current folder
-npx seemore docs       # serve a subfolder
+npx --yes seemore            # serve the current folder
+npx --yes seemore docs       # serve a subfolder
 ```
 
 The site comes up at `http://localhost:4040` by default.
@@ -14,7 +14,7 @@ The site comes up at `http://localhost:4040` by default.
 The server does not exit, so a plain foreground call will hang the session. Start it as a background process and use `--json` so you never have to parse coloured terminal output:
 
 ```bash
-npx seemore --json
+npx --yes seemore --json
 ```
 
 One line is printed once it's listening, then the process stays up:

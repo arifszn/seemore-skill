@@ -11,7 +11,7 @@ AI agent skill to turn a folder of Markdown into a documentation site with [seem
 3. **You describe changes.** Add a page, fix the wording, reorder the sidebar, make it dark blue. The preview updates as it goes.
 4. **You get a site.** Built to static files and published to a live URL, if that's what you want.
 
-No terminal commands to run yourself; that's the point of it. The one exception is a one-time login when publishing to a host, which the skill hands over cleanly and then takes back.
+No terminal commands to run yourself; that's the point of it. Publishing may require a one-time login or a repository-settings change, which the skill hands over cleanly and then takes back.
 
 ## Features
 

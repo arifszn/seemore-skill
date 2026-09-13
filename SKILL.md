@@ -19,7 +19,7 @@ Three things follow from it:
 
 ## What seemore actually is (so you don't over-build)
 
-seemore points at a folder of `.md`/`.mdx` files and serves it as a site. There is **no scaffold command, no project to create, and no config file required**. `npx seemore` in a folder of Markdown is a complete, working setup. Three commands is the entire surface:
+seemore points at a folder of `.md`/`.mdx` files and serves it as a site. There is **no scaffold command, no project to create, and no config file required**. `npx --yes seemore` in a folder of Markdown is a complete, working setup. Three commands is the entire surface:
 
 ```
 seemore [dir]           start the live dev server (default http://localhost:4040)
@@ -45,7 +45,7 @@ Ask a question only when you genuinely can't tell what they want documented, and
 
 ## Step 2. Get seemore runnable
 
-`npx seemore` downloads and runs it on demand — there is nothing to install beforehand. Don't check Node up front; just run the command. If it fails (`npx` or `node` not found, or an error about needing Node 20+), check `node --version` then. If it's older or missing, stop and tell the user plainly that Node.js 20+ is needed, and point them at https://nodejs.org. That is an install you cannot do for them, and guessing at version managers wastes their time.
+Run `npx --yes seemore` first. Do not inspect package-manager files or ask the user to choose a runner beforehand. If the user has explicitly asked for another runner, use it instead. If the default command fails, retry with the project's existing runner when one is apparent: `pnpm dlx seemore`, `yarn dlx seemore`, or `bunx seemore`. Use the runner that succeeds for the rest of the task, preserving the same arguments. If all runners fail because `npx` or `node` is missing, check `node --version` then. If Node is older or missing, stop and tell the user plainly that Node.js 20+ is needed, and point them at https://nodejs.org. That is an install you cannot do for them, and guessing at version managers wastes their time.
 
 ## Step 3. Start the preview
 
@@ -54,7 +54,7 @@ This is the moment the work becomes visible, so get here before anything else: n
 The dev server is **long-running** and does not exit. Start it as a background process, never as a blocking call that hangs the session. Use the machine-readable flag so you don't have to screen-scrape coloured output:
 
 ```bash
-npx seemore --json
+npx --yes seemore --json
 ```
 
 It prints one JSON line once it's listening, then keeps running:
@@ -69,7 +69,7 @@ Read `url` and `pageCount` from it. Then:
 2. Tell them the one thing that makes the preview worth keeping open: **it's live**. Adding, renaming, retitling or deleting a file updates the site immediately, navigation and search included, so they can leave it open while you both work.
 3. Tell them they can **edit from the page itself**: double-click any paragraph, heading, list item, quote or table cell and that block's Markdown opens in place; **Save** writes it back to the file. It's the fastest way for a non-technical user to fix their own typo, and it only works in the local preview.
 
-Point it at a subfolder when the Markdown lives deeper: `npx seemore docs`. `seemore/references/preview.md` covers the port already being in use, serving to another device, and keeping one server per project.
+Point it at a subfolder when the Markdown lives deeper: `npx --yes seemore docs`. `seemore/references/preview.md` covers the port already being in use, serving to another device, and keeping one server per project.
 
 ## Step 4. Write and edit content
 
@@ -112,14 +112,14 @@ Translate, don't quiz. "Can it be dark blue?" is a `theme` choice you should jus
 Only when they ask for something to keep, host or hand over — never as a sanity check, and never part of a first run. A build writes a `dist/` folder into theirs, so don't run one unasked, and don't use it to validate content either: the preview already surfaces dead links and duplicate addresses as warnings.
 
 ```bash
-npx seemore build
+npx --yes seemore build
 ```
 
 That prerenders every page into `dist/` as plain web files, with no server needed. Host-specific files (`_redirects`, `200.html`, `.nojekyll`) and a `404.html` are written for you.
 
 Build errors are content errors, and they name the file: two pages claiming one address, an unknown component, invalid frontmatter, a dead link. Fix them and rebuild. Don't report a failed build to the user without having tried. `seemore/references/troubleshooting.md` has the specific messages.
 
-To share a **single page** rather than a site, `npx seemore export docs/spec.md` writes one self-contained HTML file (styles inlined, images embedded, diagrams intact) that opens from a double-click. It's the right answer for "can you send this to someone who doesn't have this folder".
+To share a **single page** rather than a site, `npx --yes seemore export docs/spec.md` writes one self-contained HTML file (styles inlined, images embedded, diagrams intact) that opens from a double-click. It's the right answer for "can you send this to someone who doesn't have this folder".
 
 ## Step 7. Publish it
 
@@ -127,7 +127,7 @@ Offer this once a build succeeds; it's usually what "I want a docs site" ultimat
 
 One trap worth carrying here, because it silently produces a site with no styling: on GitHub Pages the site lives at `username.github.io/my-repo/`, not at the root, so it needs `base: '/my-repo/'` in the config (or `--base /my-repo/` on the build). A local build won't warn you about it, since the reminder only prints when the build runs inside GitHub Actions, so set it when you set up the deploy, not after.
 
-Publishing is also the one place the user may have to act: the hosts need a one-time interactive login that cannot be driven from a tool call. `seemore/references/publishing.md` explains how to hand that over and take the work back afterwards.
+Publishing is the one place the user may need to act: some hosts require a one-time interactive login, and GitHub Pages requires selecting GitHub Actions in repository settings. `seemore/references/publishing.md` explains how to hand off those steps and take the work back afterwards.
 
 ## Talking to the user
 

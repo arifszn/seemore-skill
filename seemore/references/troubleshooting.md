@@ -4,7 +4,7 @@ seemore's failures are almost all content errors, and they name the file. Read t
 
 ## The dev server
 
-**Nothing appears / "0 pages"**: `pageCount: 0` in the `--json` line means no Markdown was found where it looked. Check `contentRoot` in that same line against where the files actually are; the fix is usually `npx seemore docs` rather than `npx seemore`.
+**Nothing appears / "0 pages"**: `pageCount: 0` in the `--json` line means no Markdown was found where it looked. Check `contentRoot` in that same line against where the files actually are; the fix is usually `npx --yes seemore docs` rather than `npx --yes seemore`.
 
 **"No Markdown files found under …"**: the same thing, as a warning. In dev it serves an empty site and recovers the moment a file appears, so it's not fatal.
 
@@ -48,13 +48,13 @@ The build is deliberately stricter than the preview: problems you can write past
 
 **GitHub Pages shows a README instead of the site**: the repo's **Settings > Pages > Source** is still "Deploy from a branch" and needs to be **GitHub Actions**. That's a click only the user can make.
 
-**The site is stale**: outside GitHub Pages, nothing rebuilds on its own. A change means `npx seemore build` and redeploying. Say so plainly rather than letting the user assume it's automatic.
+**The site is stale**: outside GitHub Pages, nothing rebuilds on its own. A change means `npx --yes seemore build` and redeploying. Say so plainly rather than letting the user assume it's automatic.
 
 ## Environment
 
-**Node too old or missing**: this surfaces as `npx seemore` itself failing — `npx` or `node` not found, or an error about Node 20+. Check `node --version` only then; if it's older or missing, stop and point the user at https://nodejs.org. Don't try to install Node for them or guess at a version manager.
+**Node too old or missing**: this surfaces as `npx --yes seemore` itself failing — `npx` or `node` not found, or an error about Node 20+. Check `node --version` only then; if it's older or missing, stop and point the user at https://nodejs.org. Don't try to install Node for them or guess at a version manager.
 
-**`npx` prompts to install the package**: expected on first run, and it's already answered by the time you see output.
+**`npx` prompts to install the package**: use `npx --yes seemore` so the install confirmation cannot block an agent-run command.
 
 **Windows**: paths are handled, but if something looks path-shaped and wrong, say which path and on which command; don't paper over it.
 

@@ -72,4 +72,4 @@ You can also invoke it by name instead of waiting for it to trigger. In Claude C
 
 ## Requirements
 
-seemore runs on [Node.js](https://nodejs.org) 20 or newer. You won't run into this unless `npx seemore` fails; the skill then tells you plainly that Node is missing. Installing Node is the one step it can't do for you.
+seemore runs on [Node.js](https://nodejs.org) 20 or newer. You won't run into this unless `npx --yes seemore` fails; the skill then tells you plainly that Node is missing. Installing Node is the one step it can't do for you.

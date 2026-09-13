@@ -1,9 +1,9 @@
 # Building and publishing
 
 ```bash
-npx seemore build            # prerender the whole site into dist/
-npx seemore build docs       # build a subfolder
-npx seemore build --out site # somewhere other than dist/
+npx --yes seemore build            # prerender the whole site into dist/
+npx --yes seemore build docs       # build a subfolder
+npx --yes seemore build --out site # somewhere other than dist/
 ```
 
 `dist/` is plain web files, with no server and no Node on the host. Every page is prerendered to its own `index.html`, beside a `404.html` every static host honours, and the host-specific files are written for you: `_redirects` (Netlify, Cloudflare Pages), `200.html` (Surge), `.nojekyll` (GitHub Pages). So there is nothing to configure on the host beyond pointing it at the folder.
@@ -23,7 +23,7 @@ so don't wait for a warning that only appears in CI.
 
 ## The login reality
 
-Every host below needs a one-time account login, and that step is **interactive**: Surge prompts for email and password, Netlify and Vercel open a browser. You cannot drive it from a tool call, and it will not work through the agent prompt's `!` shell either, because `!` runs a command but can't feed a multi-prompt interactive stdin, so `npx surge login` just hangs at `email:` with nowhere to type.
+Some hosts need a one-time account login, and that step is **interactive**: Surge prompts for email and password, while Netlify and Cloudflare open a browser. You cannot drive it from a tool call, and it will not work through the agent prompt's `!` shell either, because `!` runs a command but can't feed a multi-prompt interactive stdin, so `npx surge login` just hangs at `email:` with nowhere to type. GitHub Pages does not need a CLI login, but the user must select GitHub Actions as the repository's Pages source in Settings.
 
 So the login happens in the **user's own terminal window**, meaning the real Terminal or iTerm app, not this session. Tell them the one command to run there, wait, and take the work back afterwards: the credential is saved to disk (`~/.netrc` for Surge, the CLI's own config for the others), and every later deploy reads it non-interactively.
 
@@ -57,7 +57,7 @@ The right default when the docs live in a GitHub repo: free, no extra account, a
          - uses: actions/setup-node@v5
            with:
              node-version: 22
-         - run: npx seemore build
+          - run: npx --yes seemore build
          - uses: actions/configure-pages@v5
          - uses: actions/upload-pages-artifact@v3
            with:
@@ -71,7 +71,7 @@ The right default when the docs live in a GitHub repo: free, no extra account, a
          - uses: actions/deploy-pages@v4
    ```
 
-   Point `npx seemore build` at the docs folder if they aren't at the repo root, and set `path:` to match `--out`.
+   Point `npx --yes seemore build` at the docs folder if they aren't at the repo root, and set `path:` to match `--out`.
 
 3. In the repo's **Settings > Pages**, set **Source** to **GitHub Actions**. That is a click the user makes; it can't be done from the CLI.
 4. Push, then give them `https://<user>.github.io/<repo>/`. First deploy takes a couple of minutes.
@@ -111,8 +111,8 @@ The fastest path to a URL, and the only one whose login is email and password ra
 When the user wants to send someone a single document, not host a site:
 
 ```bash
-npx seemore export docs/spec.md            # writes spec.html next to the Markdown
-npx seemore export docs/spec.md --out ~/Desktop
+npx --yes seemore export docs/spec.md            # writes spec.html next to the Markdown
+npx --yes seemore export docs/spec.md --out ~/Desktop
 ```
 
 One self-contained HTML file, with styles inlined, images embedded and diagrams intact, that opens offline from a double-click, with no host and no link to manage. The same file the **Actions > Export as HTML** button produces. Exporting is refused if `pageActions` leaves out `'export-html'`.
