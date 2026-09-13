@@ -27,6 +27,14 @@ One line is printed once it's listening, then the process stays up:
 - `pageCount`: a cheap sanity check. `0` means it found no Markdown, so it's the wrong folder, or the files are one level down.
 - `contentRoot`: the folder actually being served. Check this when the user says pages are missing.
 
+## When the JSON line never shows up
+
+Some shells wrap commands in an output filter that holds all output back until the process exits. A dev server never exits, so the JSON line can fail to arrive even though the site is already being served. Don't sit in a loop waiting for it:
+
+- Check the port is free **before** starting (`curl -s -o /dev/null localhost:4040` should fail), and pass that port explicitly with `--port`. A taken port makes the server quietly move to the next one, even with `--port`, and you'd be checking the wrong one.
+- Then poll for either the JSON line or the port answering, whichever comes first. Allow up to a minute on a first run, while `npx` downloads.
+- If only the port answered, the URL is `http://localhost:<port>/`. There's no `pageCount`, so sanity-check against the Markdown files you can see in the folder, and open the page to confirm it isn't empty.
+
 ## Flags worth knowing
 
 | Flag | Use it for |

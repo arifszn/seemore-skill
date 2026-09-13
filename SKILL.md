@@ -54,7 +54,7 @@ This is the moment the work becomes visible, so get here before anything else: n
 The dev server is **long-running** and does not exit. Start it as a background process, never as a blocking call that hangs the session. Use the machine-readable flag so you don't have to screen-scrape coloured output:
 
 ```bash
-npx --yes seemore --json
+npx --yes seemore --json --port 4040
 ```
 
 It prints one JSON line once it's listening, then keeps running:
@@ -63,7 +63,19 @@ It prints one JSON line once it's listening, then keeps running:
 { "url": "http://localhost:4040/", "port": 4040, "contentRoot": "/Users/me/my-docs", "pageCount": 12 }
 ```
 
-Read `url` and `pageCount` from it. Then:
+**Don't wait on that line alone.** Some shells wrap commands in an output filter that holds everything back until the process exits. A server never exits, so the line can fail to arrive while the site is already up, and a loop that only watches for it burns a minute or more for nothing. Instead:
+
+1. Before starting, check the port is free: `curl -s -o /dev/null localhost:4040` should fail. If something answers, pick another port and use it throughout.
+2. Start the server in the background with that `--port`.
+3. Poll for **either** the JSON line **or** the port answering, whichever comes first. Allow up to a minute on a first run, while `npx` downloads:
+
+   ```bash
+   for i in $(seq 1 60); do grep -q '"url"' <output-file> && break; curl -s -o /dev/null localhost:4040 && break; sleep 1; done
+   ```
+
+If only the port answered, the URL is `http://localhost:4040/`, and you already know roughly how many pages there are from the Markdown you found in Step 1.
+
+Read `url` and `pageCount` from the JSON when you have it. Then:
 
 1. Give the user the URL and the page count. Open it in a browser for them if you can.
 2. Tell them the one thing that makes the preview worth keeping open: **it's live**. Adding, renaming, retitling or deleting a file updates the site immediately, navigation and search included, so they can leave it open while you both work.
