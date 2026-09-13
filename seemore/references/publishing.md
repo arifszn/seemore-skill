@@ -29,6 +29,12 @@ For a private site ("team only", "behind a password"), add `auth: true` to `seem
 SEEMORE_PASSWORD='a long passphrase' npx --yes seemore build
 ```
 
+On Windows PowerShell:
+
+```powershell
+$env:SEEMORE_PASSWORD='a long passphrase'; npx --yes seemore build
+```
+
 - **The password comes from `SEEMORE_PASSWORD` only.** Never write it into the config, a workflow or any committed file. In CI, pass a secret on the build step (`SEEMORE_PASSWORD: ${{ secrets.SEEMORE_PASSWORD }}`); the user creates it in the repo's settings.
 - **Ask the user for the password.** Don't invent one or repeat it back. Suggest a long passphrase: a short one can be guessed offline.
 - Only the build is protected, never the preview.
