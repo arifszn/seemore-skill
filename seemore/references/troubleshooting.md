@@ -32,11 +32,15 @@ The build is deliberately stricter than the preview: problems you can write past
 
 **A dead `[[wikilink]]` or `.md` link**: a warning in dev, a failure in the build. That asymmetry is on purpose: you can write a link to a page you haven't created yet, and the build stops you shipping it. Either create the page or fix the link.
 
+**`` `auth` is on, but SEEMORE_PASSWORD is not set ``**: ask the user for the password and pass it as an environment variable on the build command, or from a CI secret. Never write it into a file.
+
 **A missing image is only a warning**: the page still builds, because a page with a broken image is visibly wrong on its own. Fix the path anyway.
 
 ## Config errors
 
 **A rejected feature-flag combination**: two are refused at load time, with the fix in the message: `toc.integrate` with `toc.follow`, and `navigation.instant.preview` without `navigation.instant.prefetch`. Pick one side; don't try to route around it.
+
+**`` `auth` cannot be combined with … ``**: password protection refuses `social.cards` and hosted search, which would publish page content outside the encrypted build. Ask the user which one they want.
 
 **An unknown theme name**: `theme` must be one of the twelve presets. There is no custom theme name; custom styling goes in `css`.
 
@@ -47,6 +51,8 @@ The build is deliberately stricter than the preview: problems you can write past
 **The live site has no styling, and links 404**: the `base` path. A GitHub Pages project site is served from `/<repo>/`, so it needs `base: '/<repo>/'`. This is the single most common publishing mistake, and it looks like a broken build rather than a config problem. See `references/publishing.md`.
 
 **GitHub Pages shows a README instead of the site**: the repo's **Settings > Pages > Source** is still "Deploy from a branch" and needs to be **GitHub Actions**. That's a click only the user can make.
+
+**"This browser can't open password-protected sites"**: the site isn't served over HTTPS, or the browser has service workers turned off (some private windows). Check the URL starts with `https://`.
 
 **The site is stale**: outside GitHub Pages, nothing rebuilds on its own. A change means `npx --yes seemore build` and redeploying. Say so plainly rather than letting the user assume it's automatic.
 

@@ -141,6 +141,8 @@ One trap worth carrying here, because it silently produces a site with no stylin
 
 Publishing is the one place the user may need to act: some hosts require a one-time interactive login, and GitHub Pages requires selecting GitHub Actions in repository settings. `seemore/references/publishing.md` explains how to hand off those steps and take the work back afterwards.
 
+For a private site, `auth: true` puts the build behind a password taken from `SEEMORE_PASSWORD`. `seemore/references/publishing.md` covers it; the password never goes into a file.
+
 ## Talking to the user
 
 Their vocabulary is pages, sidebar, theme, link, publish. Yours should match:

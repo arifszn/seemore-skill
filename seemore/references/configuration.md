@@ -22,6 +22,7 @@ export default {
   search: 'static',
   pageActions: ['copy-markdown', 'export-html'],
   exclude: ['drafts/**'],
+  auth: true,                          // password-protect the build; password from SEEMORE_PASSWORD
 };
 ```
 
@@ -58,7 +59,7 @@ features: { 'navigation.path': true, 'toc.integrate': true, 'toc.follow': false 
 | `content.image.zoom` | on | Click to zoom images |
 | `search.suggest` | on | Inline completion in the search box |
 | `search.highlight` | on | Carries the query onto the page you land on, so results are shareable |
-| `social.cards` | off | Generates social preview images |
+| `social.cards` | off | Generates social preview images (not with `auth`) |
 
 Two combinations are rejected at load time with the fix in the message: `toc.integrate` with `toc.follow` (no separate pane left to scroll), and `navigation.instant.preview` without `navigation.instant.prefetch` (nothing loaded to preview). Don't work around the error; pick one.
 
@@ -97,6 +98,16 @@ pageActions: ['copy-markdown', 'export-html'],   // the default
 ```
 
 `copy-markdown` copies the page's source, which is useful for pasting into an AI chat. `export-html` writes one self-contained HTML file. Dropping `'export-html'` also makes the `seemore export` command refuse to run, which is the intended coupling, not a bug.
+
+## Password protection
+
+```ts
+auth: true,                     // visitors stay unlocked a day after their last visit
+auth: { remember: '7d' },       // '12h', '7d', or 0 for this tab only
+auth: { id: 'acme-handbook' },  // stable name, so renaming the site keeps visitors unlocked
+```
+
+The password never goes in this file; see `references/publishing.md`. `auth` is refused together with `social.cards` or a hosted search provider.
 
 ## Excluding files
 

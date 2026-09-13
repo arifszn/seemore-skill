@@ -21,6 +21,19 @@ Set it deliberately, because it is never inferred. When the build runs inside Gi
 prints the exact line to add (with the repo name filled in from the environment); a local build stays silent,
 so don't wait for a warning that only appears in CI.
 
+## Password protection
+
+For a private site ("team only", "behind a password"), add `auth: true` to `seemore.config.ts`. The build encrypts the whole site and visitors unlock it in the browser, on any host below (HTTPS required).
+
+```bash
+SEEMORE_PASSWORD='a long passphrase' npx --yes seemore build
+```
+
+- **The password comes from `SEEMORE_PASSWORD` only.** Never write it into the config, a workflow or any committed file. In CI, pass a secret on the build step (`SEEMORE_PASSWORD: ${{ secrets.SEEMORE_PASSWORD }}`); the user creates it in the repo's settings.
+- **Ask the user for the password.** Don't invent one or repeat it back. Suggest a long passphrase: a short one can be guessed offline.
+- Only the build is protected, never the preview.
+- To remove someone's access, change the password and rebuild. Remind the user to share the password separately from the URL.
+
 ## The login reality
 
 Some hosts need a one-time account login, and that step is **interactive**: Surge prompts for email and password, while Netlify, Cloudflare and Vercel open a browser. You cannot drive it from a tool call, and it will not work through the agent prompt's `!` shell either, because `!` runs a command but can't feed a multi-prompt interactive stdin, so `npx surge login` just hangs at `email:` with nowhere to type. GitHub Pages does not need a CLI login, but the user must select GitHub Actions as the repository's Pages source in Settings.

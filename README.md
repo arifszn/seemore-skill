@@ -19,7 +19,7 @@ No terminal commands to run yourself; that's the point of it. Publishing may req
 - **Live preview**: pages, navigation and search update as files change; double-click any paragraph in the page to fix its text.
 - **Writes real content**: pages seeded from what you actually gave it, not placeholders.
 - **Knows the syntax**: `[[wikilinks]]`, Mermaid and D2 diagrams, admonitions, code-block titles and diff markers, the six components that exist and the ones that only look like they do.
-- **Publishes it**: GitHub Pages, Netlify, Cloudflare Pages, Surge or Vercel, with the base-path trap handled.
+- **Publishes it**: GitHub Pages, Netlify, Cloudflare Pages, Surge or Vercel, with the base-path trap handled, optionally behind a password.
 - **Fixes its own errors**: build failures name a file, and the skill reads them instead of handing you a stack trace.
 
 ## Installation
