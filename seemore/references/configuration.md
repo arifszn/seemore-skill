@@ -103,7 +103,7 @@ pageActions: ['copy-markdown', 'export-html'],   // the default
 
 ```ts
 auth: true,                     // visitors stay unlocked a day after their last visit
-auth: { remember: '7d' },       // '12h', '7d', or 0 for this tab only
+auth: { remember: '7d' },       // '12h' or '7d'
 auth: { id: 'acme-handbook' },  // stable name, so renaming the site keeps visitors unlocked
 ```
 
