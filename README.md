@@ -61,7 +61,7 @@ Add a page about how deploys work, and put it after the getting-started page
 Or invoke the skill by name:
 
 ```
-/seemore:seemore
+/seemore
 ```
 
 ## Requirements
