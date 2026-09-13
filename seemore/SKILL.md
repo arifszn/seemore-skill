@@ -123,7 +123,7 @@ To share a **single page** rather than a site, `npx --yes seemore export docs/sp
 
 ## Step 7. Publish it
 
-Offer this once a build succeeds; it's usually what "I want a docs site" ultimately meant. Read `references/publishing.md` and **let the user pick the host**. GitHub Pages, Netlify, Cloudflare Pages and Surge are all covered there.
+Offer this once a build succeeds; it's usually what "I want a docs site" ultimately meant. Read `references/publishing.md` and **let the user pick the host**. GitHub Pages, Netlify, Cloudflare Pages, Surge and Vercel are all covered there.
 
 One trap worth carrying here, because it silently produces a site with no styling: on GitHub Pages the site lives at `username.github.io/my-repo/`, not at the root, so it needs `base: '/my-repo/'` in the config (or `--base /my-repo/` on the build). A local build won't warn you about it, since the reminder only prints when the build runs inside GitHub Actions, so set it when you set up the deploy, not after.
 
