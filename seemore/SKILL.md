@@ -25,13 +25,13 @@ seemore build [dir]     build a static site into dist/
 seemore export <file>   export one page as a standalone HTML file
 ```
 
-Requires Node.js 20+. Nothing is written into the user's folder by the dev server; nothing leaves their machine.
+Nothing is written into the user's folder by the dev server; nothing leaves their machine.
 
 The correct answer is usually very little work. Markdown already exists → skip to the preview (Step 3). Don't create a `docs/` folder, config file, or package.json unasked.
 
 ## Step 1. Work out what they've got
 
-Check the working directory for `.md`/`.mdx` files and `seemore.config.ts`.
+If the request already says the Markdown is here ("this folder of notes", "my docs"), don't look: go straight to Step 3. The `pageCount` it reports is your check. Otherwise, take one quick look at the working directory for `.md`/`.mdx` files and `seemore.config.ts`.
 
 | What you find | What to do |
 | --- | --- |
@@ -43,7 +43,9 @@ Ask only when you genuinely can't tell what they want documented — one questio
 
 ## Step 2. Get seemore runnable
 
-Run `npx --yes seemore` first — don't inspect package-manager files or ask which runner beforehand. If the user has already asked for a specific runner, use it. If the default fails, retry with the project's apparent runner: `pnpm dlx seemore`, `yarn dlx seemore`, `bunx seemore`. Use whichever succeeds for the rest of the task. If all fail because `npx`/`node` is missing, check `node --version`; if Node is older or missing, stop and point the user at https://nodejs.org — that's the one install you can't do for them.
+**No pre-flight checks.** Starting the preview (Step 3) is how you find out whether seemore runs. Don't check `node --version`, `npx --version` or `which`, and don't look at package-manager files first. The user may just be trying it out, so every command before the site is live is wasted time.
+
+If the user has already asked for a specific runner, use it. If `npx --yes seemore` fails, retry with the project's apparent runner: `pnpm dlx seemore`, `yarn dlx seemore`, `bunx seemore`. Use whichever succeeds for the rest of the task. Only once the command has failed because `npx`/`node` is missing or too old (seemore needs Node 20+) should you run `node --version`. If Node is old or missing, stop and point the user at https://nodejs.org. That's the one install you can't do for them.
 
 ## Step 3. Start the preview
 
@@ -51,7 +53,7 @@ Get here before anything else — no questions asked first, nothing created firs
 
 The dev server is **long-running** and never exits — start it in the background with `--json --port 4040`. It prints one JSON line once listening (`url`, `port`, `contentRoot`, `pageCount`), then keeps running.
 
-**Don't wait on that line alone** — some shells buffer output until the process exits, which a server never does. Check the port's free first, start in the background, then poll for either the JSON line or the port answering, whichever comes first (allow up to a minute for a first-run `npx` download). The exact commands and polling loop are in `seemore/references/preview.md` — use them rather than reinventing the wait. If only the port answers, the URL is `http://localhost:4040/` and you already know roughly how many pages there are from Step 1.
+**Don't wait on that line alone** — some shells buffer output until the process exits, which a server never does. Use the **single command** in `seemore/references/preview.md`. It picks a free port, starts the server in the background, and waits for either the JSON line or the port answering, all in one shell call (it allows up to a minute for a first-run `npx` download). Don't split it into separate checks, and don't write your own wait. If it prints the server's error output instead of a URL, that's the Step 2 failure path.
 
 Then:
 1. Give the user the URL and page count. Open it in a browser if you can.

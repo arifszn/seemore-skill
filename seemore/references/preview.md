@@ -27,13 +27,31 @@ One line is printed once it's listening, then the process stays up:
 - `pageCount`: a cheap sanity check. `0` means no Markdown found — wrong folder, or files one level down.
 - `contentRoot`: the folder actually being served. Check this when the user says pages are missing.
 
-## When the JSON line never shows up
+## Start it with one command
 
-Some shells buffer output until the process exits, which a dev server never does. Don't sit in a loop waiting for it:
+Run this as one shell call. Don't check Node, the port or the folder first, because this command covers all of them:
 
-- Check the port is free **before** starting (`curl -s -o /dev/null localhost:4040` should fail), and pass that port explicitly with `--port`. A taken port makes the server quietly move to the next one even with `--port` set, so you'd be checking the wrong port.
-- Poll for either the JSON line or the port answering, whichever comes first. Allow up to a minute on a first run, while `npx` downloads.
-- If only the port answered, the URL is `http://localhost:<port>/`. There's no `pageCount`, so sanity-check against the Markdown files you can see, and open the page to confirm it isn't empty.
+```bash
+PORT=4040; while curl -s -o /dev/null "localhost:$PORT"; do PORT=$((PORT+1)); done
+LOG="${TMPDIR:-/tmp}/seemore-$PORT.log"
+nohup npx --yes seemore --json --port "$PORT" >"$LOG" 2>&1 &
+PID=$!
+for i in $(seq 60); do
+  grep -m1 '"url"' "$LOG" && break
+  curl -s -o /dev/null "localhost:$PORT" && { echo "{\"url\":\"http://localhost:$PORT/\"}"; break; }
+  kill -0 "$PID" 2>/dev/null || { echo "seemore exited:"; cat "$LOG"; break; }
+  sleep 1
+done
+```
+
+(Add `docs` after `seemore` for a subfolder. On Windows without a POSIX shell, follow the same steps in PowerShell.)
+
+Why it's shaped this way:
+
+- **Free port first, passed explicitly.** A taken port makes the server quietly move to the next one even with `--port` set, so you'd poll the wrong port.
+- **JSON line or port, whichever comes first.** Some shells buffer output until the process exits, which a dev server never does, so the JSON line may never appear.
+- **It stops if the process dies.** Then the log is printed, and that's your failure. Only now is it worth looking at the cause, such as `node`/`npx` missing or Node older than 20 (see `troubleshooting.md`).
+- **Only the port answered?** The URL is `http://localhost:<port>/`, but there's no `pageCount`. Open the page to confirm it isn't empty.
 
 ## Flags worth knowing
 
