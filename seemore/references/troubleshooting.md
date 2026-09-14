@@ -12,6 +12,8 @@ seemore's failures are almost all content errors, and they name the file. Read t
 
 **A change doesn't show up**: the file is outside the served folder, matched by `exclude`, or lost a duplicate-address collision. The server watches the content root only.
 
+**A page in a dot folder or `build/`-like folder is missing**: those are skipped by default (see `references/configuration.md`). Add the folder to `include` — e.g. `include: ['.notes']` — rather than moving or renaming the user's files.
+
 **"is not part of this site — excluded, or lost a duplicate slug"**: an inline edit was attempted on a file the site doesn't own. Same three causes as above.
 
 ## Build failures

@@ -22,6 +22,7 @@ export default {
   search: 'static',
   pageActions: ['copy-markdown', 'export-html'],
   exclude: ['drafts/**'],
+  include: ['.notes'],                 // scan a folder skipped by default (dot folders, build/, …)
   auth: true,                          // password-protect the build; password from SEEMORE_PASSWORD
 };
 ```
@@ -109,13 +110,18 @@ auth: { id: 'acme-handbook' },  // stable name, so renaming the site keeps visit
 
 The password never goes in this file — see `references/publishing.md`. `auth` is refused together with `social.cards` or a hosted search provider.
 
-## Excluding files
+## Excluding and including files
+
+Some folders are skipped by default because they're almost never docs: dot folders (`.github`, `.notes`, …), `node_modules`, `dist`, `build`, `out`, `vendor`, `target`, `venv`, `deps`, `Pods`, `bower_components`.
 
 ```ts
-exclude: ['drafts/**', '**/internal-*.md'],
+exclude: ['drafts/**', '**/internal-*.md'],   // skip more
+include: ['.notes', 'build/reports/**'],       // bring back something the defaults skip
 ```
 
-Glob patterns, relative to the content root. For a single unfinished page, `draft: true` in its frontmatter is better — stays visible in the preview, drops out of the build.
+Both take glob patterns relative to the content root; `include` also takes a plain folder name. `exclude` wins over `include`. For a single unfinished page, `draft: true` in its frontmatter is better — stays visible in the preview, drops out of the build.
+
+The defaults only apply *inside* the content root. Serving a folder that itself sits in a dot folder (`npx --yes seemore .github/docs`) needs no config.
 
 ## The base path
 
