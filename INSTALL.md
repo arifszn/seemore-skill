@@ -12,6 +12,9 @@ The skill is one folder, `seemore/`, with a `SKILL.md` at its root (its `name` m
 
 ```bash
 /plugin marketplace add arifszn/seemore-skill
+```
+
+```bash
 /plugin install seemore
 ```
 

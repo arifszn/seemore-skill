@@ -28,6 +28,9 @@ No terminal commands to run yourself. Publishing may need a one-time login or a 
 
 ```bash
 /plugin marketplace add arifszn/seemore-skill
+```
+
+```bash
 /plugin install seemore
 ```
 
