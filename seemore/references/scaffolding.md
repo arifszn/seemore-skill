@@ -13,7 +13,7 @@ my-docs/
 └── index.md
 ```
 
-That is a working site. Everything below is what you add as the content grows, when there's a reason, not up front.
+That is a working site. Everything below is what you add as content grows, when there's a reason — not up front.
 
 ## A shape that scales
 
@@ -28,11 +28,11 @@ my-docs/
 └── seemore.config.ts     only if you need a title, theme, nav…
 ```
 
-Keep the nesting shallow. Two levels is plenty for almost every site, and a deep tree makes the sidebar worse, not more organised.
+Keep the nesting shallow. Two levels is plenty for almost every site; a deep tree makes the sidebar worse, not more organised.
 
 ## Write the home page first
 
-Whatever else happens, something should claim `/`. A root `index.md` or `README.md` does it. With neither, seemore generates a card-grid index of every page. A fine placeholder, but it says nothing about what the site is.
+Something should claim `/`. A root `index.md` or `README.md` does it. With neither, seemore generates a card-grid index of every page — a fine placeholder, but it says nothing about what the site is.
 
 ```md
 ---
@@ -83,28 +83,28 @@ Three mechanisms, in precedence order.
    { "pages": ["index", "getting-started", "guide", "..."] }
    ```
 
-   Use this for the root and for any section the user cares about the order of. It's the only mechanism that survives someone renaming a title.
+   Use for the root and any section the user cares about the order of — the only mechanism that survives a title rename.
 
-2. **Frontmatter `order`**, lower numbers first. Good for a handful of pages; gets tedious past a dozen because inserting a page means renumbering.
+2. **Frontmatter `order`**, lower numbers first. Fine for a handful of pages; tedious past a dozen, since inserting one means renumbering.
 
-3. **Alphabetical by title**, which is what happens to anything the first two don't cover.
+3. **Alphabetical by title** — whatever the first two don't cover.
 
-Don't mix `meta.json` and `order` in the same directory. Pick one per directory so the next person can tell what's in charge.
+Don't mix `meta.json` and `order` in the same directory. Pick one per directory.
 
 ## Naming files
 
 The filename becomes the URL, so name for the address, not the title:
 
-- Lowercase, hyphenated: `getting-started.md`, not `Getting Started.md`. Spaces work, and slugify to `/getting-started`, but the file is then awkward everywhere else.
+- Lowercase, hyphenated: `getting-started.md`, not `Getting Started.md`. Spaces work and slugify fine, but the file is then awkward everywhere else.
 - A section is a folder with an `index.md`, so `/guide` has a real page and isn't a dead sidebar heading.
 - Two files that slugify to the same address is a build error naming both. `Deep Dive.md` and `deep-dive.md` in one folder collide.
 
 ## Seeding content the user actually wanted
 
-The point of a scaffold is to hand back something real, not lorem ipsum. Write the starting pages from what the user told you they're documenting: their project's name, their actual sections. Three real pages beat ten placeholders, and a placeholder page nobody fills in is worse than no page.
+The point of a scaffold is to hand back something real, not lorem ipsum. Write the starting pages from what the user's actually documenting — their project's name, their real sections. Three real pages beat ten placeholders, and a placeholder nobody fills in is worse than no page.
 
-If they came with material, whether pasted notes, a README or a pile of AI-written specs, that *is* the content. Put it into pages and give it an order; don't ask them to restate it.
+If they came with material — pasted notes, a README, a pile of AI-written specs — that *is* the content. Put it into pages and give it an order; don't ask them to restate it.
 
 ## Then preview it
 
-Stop scaffolding as soon as there's a home page and one real page, and start the dev server (`references/preview.md`). Everything after that is easier to judge on screen than in a file tree.
+Stop scaffolding once there's a home page and one real page, and start the dev server (`references/preview.md`). Everything after is easier to judge on screen than in a file tree.
