@@ -57,8 +57,9 @@ The dev server is **long-running** and never exits — start it in the backgroun
 
 Then:
 1. Give the user the URL and page count. Open it in a browser if you can.
-2. Tell them it's **live**: adding, renaming or deleting a file updates the site immediately, nav and search included.
-3. Tell them they can **edit from the page**: double-click any paragraph, heading, list item, quote or table cell and that block's Markdown opens in place; **Save** writes it back to the file. Local preview only.
+2. Once it's live (never before), check what's being served: list the `.md`/`.mdx` files under `contentRoot`, skipping `node_modules`. If some clearly aren't the user's notes, name them and offer to hide them with `exclude`. Typical examples are agent or tooling files (`.claude/`, `.github/`, `CLAUDE.md`, `AGENTS.md`) and vendored folders. Don't add the config until they say yes.
+3. Tell them it's **live**: adding, renaming or deleting a file updates the site immediately, nav and search included.
+4. Tell them they can **edit from the page**: double-click any paragraph, heading, list item, quote or table cell and that block's Markdown opens in place; **Save** writes it back to the file. Local preview only.
 
 Subfolder: `npx --yes seemore docs`. Ports, LAN serving, one-server-per-project: `seemore/references/preview.md`.
 
