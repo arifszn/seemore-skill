@@ -1,6 +1,6 @@
 {
   "name": "seemore",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Set up and run seemore for someone who would rather describe what they want than run install commands. Scaffolds a docs folder, writes and edits pages, starts a live preview, builds a static site, and publishes it to a live URL.",
   "license": "MIT",
   "author": {
