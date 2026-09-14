@@ -80,7 +80,7 @@ With the preview running, every save is visible immediately — tell the user wh
 
 A folder with no config file builds correctly — never delay a first run for configuration. Never create `seemore.config.ts` on your own initiative, even for a good reason (agent-instruction files cluttering the page list, no site title). Fold the suggestion into the message reporting the live URL, and move on.
 
-Create or edit the config only when the user asks for something it controls: a title, theme, nav link, footer, logo, "edit this page" links, excluding files.
+Create or edit the config only when the user asks for something it controls: a title, theme, nav link, footer, logo, "edit this page" links, excluding files, or pages in a folder skipped by default (dot folders, `build/`, …) that need `include`.
 
 ```ts
 // seemore.config.ts
@@ -94,6 +94,8 @@ export default {
 `title` is **required as soon as a config file exists** — the build fails without it. Twelve built-in themes; full option list, feature flags, hosted search: `references/configuration.md`.
 
 Translate, don't quiz. "Can it be dark blue?" → pick a `theme` and show them, don't ask about colour tokens.
+
+Write only the keys that request needs. Every other option already has a working default, so the reference's full option list is not a template: no feature flags the user didn't ask for (`navigation.sections`, for one, changes the whole sidebar), no `exclude` entries for folders skipped anyway (`node_modules`, dot folders, `dist`, `build`, …), no explanatory comments.
 
 ## Step 6. Build the static site
 

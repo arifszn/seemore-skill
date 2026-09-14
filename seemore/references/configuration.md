@@ -6,6 +6,8 @@ Optional. A folder with no config file works in the browser, in a code editor an
 
 ## The whole option set
 
+A reference, not a template. A real config sets only what the user asked for or the content needs — usually `title`, often `theme`, rarely more. Every option below already has a working default.
+
 ```ts
 // seemore.config.ts
 export default {
@@ -15,14 +17,14 @@ export default {
   base: '/my-repo/',                   // subpath the site is served from
   theme: 'ocean',
   css: './custom.css',                 // appended last, so it wins
-  features: { 'navigation.path': true },
+  features: { /* only flags being changed */ },
   nav: [{ text: 'GitHub', link: 'https://github.com/you/repo' }],
   footer: { text: '© 2026' },
   editLink: { base: 'https://github.com/you/repo/edit/main/docs' },
   search: 'static',
   pageActions: ['copy-markdown', 'export-html'],
   exclude: ['drafts/**'],
-  include: ['.notes'],                 // scan a folder skipped by default (dot folders, build/, …)
+  include: ['.notes'],
   auth: true,                          // password-protect the build; password from SEEMORE_PASSWORD
 };
 ```
@@ -115,11 +117,11 @@ The password never goes in this file — see `references/publishing.md`. `auth` 
 Some folders are skipped by default because they're almost never docs: dot folders (`.github`, `.notes`, …), `node_modules`, `dist`, `build`, `out`, `vendor`, `target`, `venv`, `deps`, `Pods`, `bower_components`.
 
 ```ts
-exclude: ['drafts/**', '**/internal-*.md'],   // skip more
-include: ['.notes', 'build/reports/**'],       // bring back something the defaults skip
+exclude: ['drafts/**', '**/internal-*.md'],
+include: ['.notes', 'build/reports/**'],
 ```
 
-Both take glob patterns relative to the content root; `include` also takes a plain folder name. `exclude` wins over `include`. For a single unfinished page, `draft: true` in its frontmatter is better — stays visible in the preview, drops out of the build.
+`exclude` skips more; `include` brings back something the defaults skip. Never repeat a default in `exclude` — `'**/node_modules/**'` there does nothing. Both take glob patterns relative to the content root; `include` also takes a plain folder name. `exclude` wins over `include`. For a single unfinished page, `draft: true` in its frontmatter is better — stays visible in the preview, drops out of the build.
 
 The defaults only apply *inside* the content root. Serving a folder that itself sits in a dot folder (`npx --yes seemore .github/docs`) needs no config.
 
