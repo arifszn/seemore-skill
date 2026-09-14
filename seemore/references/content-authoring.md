@@ -1,6 +1,6 @@
 # Writing pages
 
-seemore renders GitHub Flavoured Markdown in `.md` and `.mdx` files, plus the additions below. Read this before writing anything beyond prose. Half of it exists to stop you from inventing syntax that doesn't work here.
+seemore renders GitHub Flavoured Markdown in `.md` and `.mdx` files, plus the additions below. Read this before writing anything beyond prose.
 
 ## Page addresses
 
@@ -22,9 +22,9 @@ Prefer `[[wikilinks]]`:
 See [[getting-started]], or [[guide/writing|how to write pages]], or [[configuration#Search]].
 ```
 
-They take a page name, not a relative path, so they survive a file moving and they're far easier to get right than `../../guide/writing.md`. Relative `.md` links do work, and are resolved to real links automatically, so existing content doesn't need converting.
+They take a page name, not a relative path, so they survive a file moving. Relative `.md` links also work and resolve automatically, so existing content doesn't need converting.
 
-Dead links are a warning in the preview and a build failure, which is the point: the build is where you find them.
+Dead links are a warning in the preview and a build failure — that's the point: the build is where you find them.
 
 ## Admonitions
 
@@ -43,7 +43,7 @@ In `.mdx`, `<Callout type="warn" title="Careful">…</Callout>` is the same box 
 
 ## Steps
 
-Numbered headings become a drawn, numbered sequence, with the rule and the markers added for you:
+Numbered headings become a drawn, numbered sequence, rule and markers added for you:
 
 ```md
 ## 1. Install it
@@ -51,7 +51,7 @@ Numbered headings become a drawn, numbered sequence, with the rule and the marke
 ## 2. Point it at a folder
 ```
 
-Use this for anything procedural; it reads far better than a bare ordered list.
+Use for anything procedural — reads far better than a bare ordered list.
 
 ## Code blocks
 
@@ -83,7 +83,7 @@ So `# [!code highlight]` in Python, `<!-- [!code highlight] -->` in HTML.
 
 ## Diagrams
 
-Mermaid and D2, straight from a fence, with no setup and rendered in the browser:
+Mermaid and D2, straight from a fence, no setup, rendered in the browser:
 
 ````md
 ```mermaid
@@ -98,7 +98,7 @@ markdown -> seemore -> site
 ```
 ````
 
-Reach for one when the content is genuinely a graph or a sequence. A diagram of three boxes in a row is worse than the sentence it replaces.
+Reach for one when the content is genuinely a graph or sequence — three boxes in a row is worse than the sentence it replaces.
 
 ## Images and PDFs
 
@@ -110,11 +110,11 @@ Drop the file next to the page and link it relatively. Images are inlined as has
 [The spec](./spec.pdf)
 ```
 
-Always write real alt text describing what's in the image. It's what a screen reader and a search index get.
+Always write real alt text describing what's in the image — it's what a screen reader and a search index get.
 
 ## Components
 
-An `.mdx` file can use these six without importing anything. **There are no others**. Any other tag fails the build, naming the file and the component (fumadocs' `<Tabs>`, `<Accordions>` and `<Files>` included).
+An `.mdx` file can use these six without importing anything. **There are no others.** Any other tag fails the build, naming the file and the component (fumadocs' `<Tabs>`, `<Accordions>` and `<Files>` included).
 
 | Component | What it is |
 | --- | --- |
@@ -124,7 +124,7 @@ An `.mdx` file can use these six without importing anything. **There are no othe
 | `<Mermaid>`, `<D2>` | What a diagram fence compiles to; usable directly |
 | `<Pdf>` | The viewer a linked PDF opens in |
 
-In a plain `.md` file a tag isn't JSX at all: it's dropped and its text kept. So components need the `.mdx` extension. If a user's `<Callout>` "isn't working", check the extension first.
+In a plain `.md` file a tag isn't JSX at all: it's dropped and its text kept. So components need the `.mdx` extension — if a user's `<Callout>` "isn't working", check the extension first.
 
 Code tabs need a `defaultValue`, or the block opens with nothing selected. Leave a blank line around each fence:
 
@@ -153,17 +153,17 @@ pnpm add seemore
 
 ## Editing someone else's content
 
-Two rules, because getting these wrong is how you lose a user's trust:
+Two rules — getting these wrong is how you lose a user's trust:
 
 - **Change what was asked and nothing else.** Don't reflow paragraphs, re-wrap lines, normalise quotes or "tidy" headings in a file you were asked to fix one sentence in. The diff should be readable.
-- **Keep their voice.** If their docs are terse and lowercase, write terse and lowercase. You're editing their documentation, not replacing it with yours.
+- **Keep their voice.** If their docs are terse and lowercase, write terse and lowercase.
 
-When restructuring is genuinely needed, such as splitting a 3,000-line file, describe the split and get a yes before moving text.
+When restructuring is genuinely needed (splitting a 3,000-line file), describe the split and get a yes before moving text.
 
 ## A style that suits docs
 
 - Lead with what the reader wants to do; put background after, or leave it out.
 - One idea per section, with a heading that says what the section is about.
-- Show the command or the code, then explain it. A reader scanning for the snippet should find it without reading the prose.
+- Show the command or code, then explain it — a reader scanning for the snippet should find it without reading the prose.
 - Prefer a table over a bulleted list of key–value pairs.
 - Write the page someone would want at the moment they're stuck.
