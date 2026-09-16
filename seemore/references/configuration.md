@@ -49,7 +49,7 @@ features: { 'navigation.path': true, 'toc.integrate': true, 'toc.follow': false 
 | --- | --- | --- |
 | `navigation.instant.prefetch` | on | Preloads a page on hover |
 | `navigation.instant.preview` | off | Shows the target page in a popover on hover (needs prefetch) |
-| `navigation.footer` | on | Previous/next links at the foot of a page |
+| `navigation.footer` | on | Previous and next page links. The `footer` key controls the site footer. |
 | `navigation.top` | on | Top navigation bar |
 | `navigation.path` | off | Breadcrumbs |
 | `navigation.sections` | off | Groups the sidebar into sections |
