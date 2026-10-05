@@ -36,7 +36,7 @@ Deliberately stricter than the preview — problems you can write past while edi
 
 **`` `auth` is on, but SEEMORE_PASSWORD is not set ``**: ask the user for the password and pass it as an env var on the build command, or from a CI secret. Never write it into a file.
 
-**A missing image is only a warning**: the page still builds, because a broken image is visibly wrong on its own. Fix the path anyway.
+**A missing image or media file is only a warning** (`Missing asset … referenced by …`): the page still builds, because a broken image or empty player is visibly wrong on its own. Fix the path anyway.
 
 ## Config errors
 

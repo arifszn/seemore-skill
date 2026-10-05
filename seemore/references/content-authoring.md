@@ -100,7 +100,7 @@ markdown -> seemore -> site
 
 Reach for one when the content is genuinely a graph or sequence — three boxes in a row is worse than the sentence it replaces.
 
-## Images and PDFs
+## Images, PDFs, video and audio
 
 Drop the file next to the page and link it relatively. Images are inlined as hashed assets with click-to-zoom; PDFs open in the browser's own viewer.
 
@@ -111,6 +111,17 @@ Drop the file next to the page and link it relatively. Images are inlined as has
 ```
 
 Always write real alt text describing what's in the image — it's what a screen reader and a search index get.
+
+Video and audio use the HTML tag, in `.md` or `.mdx`. A relative `src` (and a video's `poster`) on `<video>`, `<audio>`, `<source>` or `<track>` is bundled the same way as an image; a remote `https://` URL is left as written.
+
+```html
+<video controls width="100%">
+  <source src="./demo.webm" type="video/webm">
+  <source src="./demo.mp4" type="video/mp4">
+</video>
+```
+
+List a WebM source before the MP4. VS Code's preview, including seemore's own extension panel, cannot decode H.264, so an MP4-only video sits at 0:00 there while it plays in a browser. `ffmpeg -i demo.mp4 -c:v libvpx-vp9 -crf 32 -b:v 0 -c:a libopus demo.webm` makes one. `![](./demo.mp4)` does not render a player; use the tag.
 
 ## Components
 
@@ -124,7 +135,7 @@ An `.mdx` file can use these six without importing anything. **There are no othe
 | `<Mermaid>`, `<D2>` | What a diagram fence compiles to; usable directly |
 | `<Pdf>` | The viewer a linked PDF opens in |
 
-In a plain `.md` file a tag isn't JSX at all: it's dropped and its text kept. So components need the `.mdx` extension — if a user's `<Callout>` "isn't working", check the extension first.
+In a plain `.md` file a tag is HTML, not JSX: `<Callout>` renders as an unknown element with its text inside, not as the component. So components need the `.mdx` extension — if a user's `<Callout>` "isn't working", check the extension first.
 
 Code tabs need a `defaultValue`, or the block opens with nothing selected. Leave a blank line around each fence:
 

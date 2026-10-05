@@ -71,7 +71,7 @@ Read `seemore/references/content-authoring.md` before writing anything non-trivi
 - **Something should claim the home page.** Root `index.md` or `README.md` → `/`. With neither, seemore generates a card grid of every page.
 - **Ordering: `meta.json` > frontmatter `order` (lower first) > alphabetical.** "Sidebar's in the wrong order" → `meta.json`.
 - **Frontmatter keys seemore acts on**: `title`, `description`, `icon`, `order`, `draft`. Others pass through untouched.
-- **Components need `.mdx`.** Only six exist: `<Callout>`, `<Card>`/`<Cards>`, `<CodeBlockTabs>`, `<Mermaid>`, `<D2>`, `<Pdf>`. Any other tag fails the build by name. In plain `.md` a tag isn't JSX; it's dropped and its text kept.
+- **Components need `.mdx`.** Only six exist: `<Callout>`, `<Card>`/`<Cards>`, `<CodeBlockTabs>`, `<Mermaid>`, `<D2>`, `<Pdf>`. Any other tag fails the build by name. In plain `.md` a tag is HTML, not JSX: `<Callout>` renders as an unknown element with its text inside.
 - **Write `[[wikilinks]]`, not relative paths**, between pages. `[[Page|label]]` and `[[Page#Heading]]` both work and survive a file moving.
 
 With the preview running, every save is visible immediately — tell the user what to look at rather than describing it.
