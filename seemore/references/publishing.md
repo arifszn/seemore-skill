@@ -19,6 +19,14 @@ The one thing that silently produces a broken site: a page with no styling and n
 
 Never inferred — set it deliberately. When the build runs inside GitHub Actions with no `base` set, it prints the exact line to add (repo name filled in from the environment); a local build stays silent, so don't wait for a warning that only appears in CI.
 
+## Write a sitemap
+
+Optional, and only once the site's public address is known. Set `url` in `seemore.config.ts` to the address the site is served from, origin only (`https://username.github.io`, not `https://username.github.io/my-repo/`). The path stays in `base`. With `url` set, the build writes `sitemap.xml` into `dist/`, which search engines use to find every page. Without `url`, no sitemap is written.
+
+A password-protected site never gets one. The build prints a warning and skips it, since the file would list every page address.
+
+`url` needs seemore 2.1.0 or newer. The sitemap lands at `<url><base>sitemap.xml`. Tell the user they can submit that address in their search engine's webmaster tools. seemore does not write a `robots.txt`.
+
 ## Password protection
 
 For a private site ("team only", "behind a password"), add `auth: true` to `seemore.config.ts`. The build encrypts the whole site, and visitors unlock it in the browser, on any host below (HTTPS required).
@@ -52,7 +60,7 @@ If they'd rather not, a token skips it entirely: Surge takes `SURGE_LOGIN` + `SU
 
 The right default when the docs live in a GitHub repo: free, no extra account, and it redeploys itself on every push. No interactive login — GitHub Actions is already authenticated.
 
-1. Set `base: '/<repo-name>/'` in `seemore.config.ts`.
+1. Set `base: '/<repo-name>/'` in `seemore.config.ts`. Optionally add `url: 'https://<user>.github.io'` for a sitemap (see "Write a sitemap").
 2. Add `.github/workflows/deploy-docs.yml`:
 
    ```yaml

@@ -15,6 +15,7 @@ export default {
   description: 'Everything about the thing.',
   favicon: './favicon.svg',
   base: '/my-repo/',                   // subpath the site is served from
+  url: 'https://you.github.io',        // optional: address of the site, origin only; writes sitemap.xml
   theme: 'ocean',
   css: './custom.css',                 // appended last, so it wins
   features: { /* only flags being changed */ },
