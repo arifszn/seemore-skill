@@ -69,7 +69,7 @@ draft: false
 | --- | --- |
 | `title` | Sidebar label, tab title, search result title. Falls back to the first heading. |
 | `description` | Shown under the title and in search results. |
-| `icon` | A [Lucide](https://lucide.dev) icon name for the sidebar. |
+| `icon` | A [Lucide](https://lucide.dev) icon name for the sidebar and the cards on the generated index page. |
 | `order` | Sidebar position, lower first. Second in precedence to `meta.json`. |
 | `draft` | Kept in the local preview, dropped from the build. How you park an unfinished page. |
 

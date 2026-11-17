@@ -2,6 +2,8 @@
 
 seemore renders GitHub Flavoured Markdown in `.md` and `.mdx` files, plus the additions below. Read this before writing anything beyond prose.
 
+Page settings (`title`, `description`, `icon`, `order`, `draft`) go in the frontmatter: see the table in `scaffolding.md`. `icon` takes a [Lucide](https://lucide.dev) icon name, such as `BookOpen`.
+
 ## Page addresses
 
 | File | Address |
