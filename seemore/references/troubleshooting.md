@@ -24,7 +24,7 @@ Deliberately stricter than the preview — problems you can write past while edi
 
 **`Invalid frontmatter in <file>`**: names the file and the field. `title` must be a string, `order` a number, `draft` a boolean. Unknown keys pass through fine — this is always one of the five typed keys.
 
-**`<file> failed to render`, with `` `<Nope>` is not one of the components seemore provides ``**: an MDX page used a component that doesn't exist. Only six do: `<Callout>`, `<Card>`/`<Cards>`, `<CodeBlockTabs>`, `<Mermaid>`, `<D2>`, `<Pdf>`. Rewrite with one of those or with plain Markdown. `<Tabs>`, `<Accordions>` and `<Files>` look plausible and aren't available.
+**`<file> failed to render`, with `` `<Nope>` is not one of the components seemore provides ``**: an MDX page used a component that doesn't exist. Only seven do: `<Callout>`, `<Card>`/`<Cards>`, `<CodeBlockTabs>`, `<Mermaid>`, `<D2>`, `<Pdf>`, `<Term>`. Rewrite with one of those or with plain Markdown. `<Tabs>`, `<Accordions>` and `<Files>` look plausible and aren't available.
 
 **A component renders as literal text**: the file is `.md`, not `.mdx`. In plain Markdown a tag isn't JSX — it's dropped, text kept. Rename the file.
 

@@ -127,7 +127,7 @@ List a WebM source before the MP4. VS Code's preview, including seemore's own ex
 
 ## Components
 
-An `.mdx` file can use these six without importing anything. **There are no others.** Any other tag fails the build, naming the file and the component (fumadocs' `<Tabs>`, `<Accordions>` and `<Files>` included).
+An `.mdx` file can use these seven without importing anything. **There are no others.** Any other tag fails the build, naming the file and the component (fumadocs' `<Tabs>`, `<Accordions>` and `<Files>` included).
 
 | Component | What it is |
 | --- | --- |
@@ -136,8 +136,17 @@ An `.mdx` file can use these six without importing anything. **There are no othe
 | `<CodeBlockTabs>` | One code block per tab: npm, pnpm, yarn, bun |
 | `<Mermaid>`, `<D2>` | What a diagram fence compiles to; usable directly |
 | `<Pdf>` | The viewer a linked PDF opens in |
+| `<Term tip="…" image="…">` | A word with a hint that opens on hover, tap or keyboard focus |
 
 In a plain `.md` file a tag is HTML, not JSX: `<Callout>` renders as an unknown element with its text inside, not as the component. So components need the `.mdx` extension — if a user's `<Callout>` "isn't working", check the extension first.
+
+A term goes inline, inside a sentence. Give it a `tip`, an `image`, or both:
+
+```mdx
+Set the page title in the <Term tip="The YAML block between two --- lines at the top of a Markdown file.">frontmatter</Term>.
+```
+
+`tip` is plain text: Markdown and links inside it show literally. `image` is a sibling file, resolved like any other image. `<Term>` needs seemore 2.3.0 or newer.
 
 Code tabs need a `defaultValue`, or the block opens with nothing selected. Leave a blank line around each fence:
 
