@@ -38,6 +38,10 @@ Deliberately stricter than the preview — problems you can write past while edi
 
 **A missing image or media file is only a warning** (`Missing asset … referenced by …`): the page still builds, because a broken image or empty player is visibly wrong on its own. Fix the path anyway.
 
+**`` `social.cards` needs `url` ``**: the build succeeds, but link previews can't load the card images. Set `url` to the site's origin (see `references/publishing.md`).
+
+**`` The favicon named by `favicon` was not found ``**: the site keeps the default icon. The path is relative to the config file, not the content folder. A configured favicon is only copied into the build from seemore newer than 2.3.0.
+
 ## Config errors
 
 **A rejected feature-flag combination**: `toc.integrate` with `toc.follow`, and `navigation.instant.preview` without `navigation.instant.prefetch` — both refused at load time, fix named in the message. Pick one side.

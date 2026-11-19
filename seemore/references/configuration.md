@@ -13,9 +13,9 @@ A reference, not a template. A real config sets only what the user asked for or 
 export default {
   title: 'My Docs',                    // required once this file exists
   description: 'Everything about the thing.',
-  favicon: './favicon.svg',
+  favicon: './favicon.svg',            // relative to this file; the build copies it into the output
   base: '/my-repo/',                   // subpath the site is served from
-  url: 'https://you.github.io',        // optional: address of the site, origin only; writes sitemap.xml
+  url: 'https://you.github.io',        // optional: address of the site, origin only; writes sitemap.xml, needed by social cards
   theme: 'ocean',
   css: './custom.css',                 // appended last, so it wins
   features: { /* only flags being changed */ },
@@ -63,7 +63,7 @@ features: { 'navigation.path': true, 'toc.integrate': true, 'toc.follow': false 
 | `content.image.zoom` | on | Click to zoom images |
 | `search.suggest` | on | Inline completion in the search box |
 | `search.highlight` | on | Carries the query onto the page you land on, so results are shareable |
-| `social.cards` | off | Generates social preview images (not with `auth`) |
+| `social.cards` | off | Generates social preview images. Needs `url` (see `references/publishing.md`). Not with `auth` |
 
 Two combinations are rejected at load time, with the fix named in the message: `toc.integrate` with `toc.follow` (no separate pane left to scroll), and `navigation.instant.preview` without `navigation.instant.prefetch` (nothing loaded to preview). Pick one side.
 
