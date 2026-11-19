@@ -80,10 +80,12 @@ Three mechanisms, in precedence order.
 1. **`meta.json` in a directory**, an explicit list, where `"..."` stands in for everything you didn't name:
 
    ```json
-   { "pages": ["index", "getting-started", "guide", "..."] }
+   { "pages": ["index", "getting-started", "---Guides---", "guide", "..."] }
    ```
 
    Use for the root and any section the user cares about the order of — the only mechanism that survives a title rename.
+
+   An entry written as `"---Label---"` adds a section label to the sidebar.
 
 2. **Frontmatter `order`**, lower numbers first. Fine for a handful of pages; tedious past a dozen, since inserting one means renumbering.
 
