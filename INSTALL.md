@@ -54,7 +54,7 @@ Ask your agent **"what skills do you have?"**. `seemore` should appear in the li
 Turn this folder of notes into a docs site I can read in my browser
 ```
 
-You can also invoke it by name: `/seemore:seemore` in Claude Code, or just `seemore` elsewhere.
+You can also invoke it by name: `/seemore` in Claude Code, or just `seemore` elsewhere.
 
 ## Requirements
 
