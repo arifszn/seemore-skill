@@ -32,7 +32,7 @@ Deliberately stricter than the preview — problems you can write past while edi
 
 **`title: required when a config file exists`**: a `seemore.config.ts` was created without a `title`. Add one.
 
-**A dead `[[wikilink]]` or `.md` link**: a warning in dev, a failure in the build — intentional, so you can write a link before the page exists but can't ship it. Create the page or fix the link.
+**A dead `[[wikilink]]` or `.md` link**: a warning in dev and in the build, which still succeeds. The warning names the file and the link. Create the page or fix the link before publishing.
 
 **`` `auth` is on, but SEEMORE_PASSWORD is not set ``**: ask the user for the password and pass it as an env var on the build command, or from a CI secret. Never write it into a file.
 
@@ -60,7 +60,7 @@ Deliberately stricter than the preview — problems you can write past while edi
 
 ## Environment
 
-**Node too old or missing**: surfaces as `npx --yes seemore` itself failing — `npx`/`node` not found, or a Node 20+ error. Check `node --version` only then; if old or missing, point the user at https://nodejs.org. Don't try to install Node for them or guess at a version manager.
+**Node too old or missing**: surfaces as `npx --yes seemore` itself failing — `npx`/`node` not found, or a Node 22+ error. Check `node --version` only then; if old or missing, point the user at https://nodejs.org. Don't try to install Node for them or guess at a version manager.
 
 **`npx` prompts to install the package**: use `npx --yes seemore` so the install confirmation can't block an agent-run command.
 
