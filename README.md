@@ -63,7 +63,11 @@ Add a page about how deploys work, and put it after the getting-started page
 Publish this to GitHub Pages behind a password
 ```
 
-Or call the skill by name: `/seemore:seemore` in Claude Code, `seemore` in other agents.
+Or call the skill by name:
+
+```
+/seemore
+```
 
 ## Requirements
 
