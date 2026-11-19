@@ -26,7 +26,7 @@ See [[getting-started]], or [[guide/writing|how to write pages]], or [[configura
 
 They take a page name, not a relative path, so they survive a file moving. Relative `.md` links also work and resolve automatically, so existing content doesn't need converting.
 
-Dead links are a warning in the preview and a build failure — that's the point: the build is where you find them.
+Dead links are a warning in the preview and in the build, listed at the end of the build output. The build still succeeds, so check that list rather than relying on a failure.
 
 ## Admonitions
 

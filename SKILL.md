@@ -45,7 +45,7 @@ Ask only when you genuinely can't tell what they want documented — one questio
 
 **No pre-flight checks.** Starting the preview (Step 3) is how you find out whether seemore runs. Don't check `node --version`, `npx --version` or `which`, and don't look at package-manager files first. The user may just be trying it out, so every command before the site is live is wasted time.
 
-If the user has already asked for a specific runner, use it. If `npx --yes seemore` fails, retry with the project's apparent runner: `pnpm dlx seemore`, `yarn dlx seemore`, `bunx seemore`. Use whichever succeeds for the rest of the task. Only once the command has failed because `npx`/`node` is missing or too old (seemore needs Node 20+) should you run `node --version`. If Node is old or missing, stop and point the user at https://nodejs.org. That's the one install you can't do for them.
+If the user has already asked for a specific runner, use it. If `npx --yes seemore` fails, retry with the project's apparent runner: `pnpm dlx seemore`, `yarn dlx seemore`, `bunx seemore`. Use whichever succeeds for the rest of the task. Only once the command has failed because `npx`/`node` is missing or too old (seemore needs Node 22+) should you run `node --version`. If Node is old or missing, stop and point the user at https://nodejs.org. That's the one install you can't do for them.
 
 ## Step 3. Start the preview
 
@@ -107,7 +107,7 @@ npx --yes seemore build
 
 Prerenders every page into `dist/` as plain web files, plus host-specific files (`_redirects`, `200.html`, `.nojekyll`) and a `404.html`.
 
-Build errors are content errors and name the file: duplicate address, unknown component, invalid frontmatter, dead link. Fix and rebuild — details in `seemore/references/troubleshooting.md`.
+Build errors are content errors and name the file: duplicate address, unknown component, invalid frontmatter. Fix and rebuild — details in `seemore/references/troubleshooting.md`. Dead links don't fail the build; they're listed as warnings at the end of its output, so read that list too.
 
 For a **single page**, `npx --yes seemore export docs/spec.md` writes one self-contained HTML file (styles inlined, images embedded, diagrams intact) — the right answer for "send this to someone without this folder".
 

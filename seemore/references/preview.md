@@ -50,7 +50,7 @@ Why it's shaped this way:
 
 - **Free port first, passed explicitly.** A taken port makes the server quietly move to the next one even with `--port` set, so you'd poll the wrong port.
 - **JSON line or port, whichever comes first.** Some shells buffer output until the process exits, which a dev server never does, so the JSON line may never appear.
-- **It stops if the process dies.** Then the log is printed, and that's your failure. Only now is it worth looking at the cause, such as `node`/`npx` missing or Node older than 20 (see `troubleshooting.md`).
+- **It stops if the process dies.** Then the log is printed, and that's your failure. Only now is it worth looking at the cause, such as `node`/`npx` missing or Node older than 22 (see `troubleshooting.md`).
 - **Only the port answered?** The URL is `http://localhost:<port>/`, but there's no `pageCount`. Open the page to confirm it isn't empty.
 
 ## Flags worth knowing
@@ -75,7 +75,7 @@ Worth telling the user — it's more than hot-reloading text:
 
 - Adding, deleting, renaming or retitling a file updates the sidebar, navigation and search index immediately.
 - Editing a page's body updates it in place without losing scroll position.
-- A content error that would fail a build (a dead link, a duplicate address) is a **warning** in dev, not a crash, so a half-finished edit doesn't take the site down. Catch them here — don't run `seemore build` just to check: a build writes `dist/` into the user's folder, unasked.
+- A content error that would fail a build (a duplicate address, invalid frontmatter) is a **warning** in dev, not a crash, so a half-finished edit doesn't take the site down. Catch them here — don't run `seemore build` just to check: a build writes `dist/` into the user's folder, unasked.
 - `draft: true` pages are visible in the preview and excluded from the build.
 
 ## Editing from the page
