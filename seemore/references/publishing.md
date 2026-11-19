@@ -27,6 +27,8 @@ A password-protected site never gets one. The build prints a warning and skips i
 
 `url` needs seemore 2.1.0 or newer. The sitemap lands at `<url><base>sitemap.xml`. Tell the user they can submit that address in their search engine's webmaster tools. seemore does not write a `robots.txt`.
 
+`social.cards` also needs `url`: link previews only load an absolute image URL. With `url` set, each card is at `<url><base>api/og/<slug>/card.png`. Without it, the build warns and the cards don't show in link previews. Absolute card URLs need seemore newer than 2.3.0.
+
 ## Password protection
 
 For a private site ("team only", "behind a password"), add `auth: true` to `seemore.config.ts`. The build encrypts the whole site, and visitors unlock it in the browser, on any host below (HTTPS required).
